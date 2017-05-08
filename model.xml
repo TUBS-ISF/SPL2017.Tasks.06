@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="GameSPL">
+				<feature mandatory="true" name="Window">
+					<description>
+						Basic Window (JFrame, Mandatory)
+					</description>
+				</feature>
+				<or abstract="true" name="Objects">
+					<and mandatory="true" name="Player">
+						<description>
+							Showing the Player Figure
+						</description>
+						<description>
+							Showing the Player Figure
+						</description>
+						<and abstract="true" name="Abilities">
+							<feature name="Jump">
+								<description>
+									Ability to Jump (Controls should be chosen ;D)
+								</description>
+							</feature>
+							<and abstract="true" name="Move">
+								<description>
+									Ability to Move the Player (Needs Controls)
+								</description>
+								<description>
+									Ability to Move the Player (Needs Controls)
+								</description>
+								<feature abstract="true" name="Runnig">
+									<description>
+										Enables the Ability to get a faster Movement with an additional Input
+									</description>
+								</feature>
+							</and>
+						</and>
+						<feature abstract="true" name="Appearance">
+							<description>
+								GIves Options for the Appearance
+							</description>
+						</feature>
+					</and>
+					<feature mandatory="true" name="Floor">
+						<description>
+							Set the Floorlevel
+						</description>
+					</feature>
+					<and mandatory="true" name="Background">
+						<description>
+							Setting the Background
+						</description>
+						<description>
+							Setting the Background
+						</description>
+						<feature abstract="true" name="Customizable"/>
+					</and>
+					<and abstract="true" mandatory="true" name="Obtacles">
+						<description>
+							Enables Obtacles
+						</description>
+						<description>
+							Enables Obtacles
+						</description>
+						<feature name="Moving"/>
+					</and>
+				</or>
+				<or abstract="true" name="Gameplay">
+					<feature mandatory="true" name="Score">
+						<description>
+							Counts the passed Obtacles
+						</description>
+					</feature>
+					<feature abstract="true" mandatory="true" name="Timer">
+						<description>
+							Sets a Timer on the Window, which counts
+						</description>
+					</feature>
+					<or abstract="true" mandatory="true" name="Controls">
+						<feature mandatory="true" name="MouseInput">
+							<description>
+								MouseEvents settings
+							</description>
+						</feature>
+						<feature mandatory="true" name="Keyboard">
+							<description>
+								KeyEvents settings
+							</description>
+						</feature>
+					</or>
+				</or>
+				<alt abstract="true" mandatory="true" name="Mode">
+					<feature mandatory="true" name="Endless">
+						<description>
+							Generates endless Obtacles (if chosen) and waits for a GameOver by Collision
+						</description>
+					</feature>
+					<or abstract="true" mandatory="true" name="Finite">
+						<feature abstract="true" mandatory="true" name="ByTime">
+							<description>
+								Ends after a fix amount of time
+							</description>
+						</feature>
+						<feature abstract="true" mandatory="true" name="ByScore">
+							<description>
+								Ends after Reaching a fix score
+							</description>
+						</feature>
+					</or>
+				</alt>
+				<or abstract="true" name="Physics">
+					<feature mandatory="true" name="Collision">
+						<description>
+							Enables Collision reaction, like GameOver if obtacles are touched or pushed offscreen
+						</description>
+					</feature>
+					<feature mandatory="true" name="Gravity">
+						<description>
+							activates Gravity to fall.
+						</description>
+					</feature>
+				</or>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<eq>
+					<var>Abilities</var>
+					<var>Controls</var>
+				</eq>
+			</rule>
+			<rule>
+				<imp>
+					<var>Score</var>
+					<var>Obtacles</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ByScore</var>
+					<var>Score</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ByTime</var>
+					<var>Timer</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
