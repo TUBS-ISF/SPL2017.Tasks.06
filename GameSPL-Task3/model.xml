@@ -56,7 +56,7 @@
 						</description>
 						<feature abstract="true" name="Customizable"/>
 					</and>
-					<and abstract="true" mandatory="true" name="Obtacles">
+					<and mandatory="true" name="Obtacles">
 						<description>
 							Enables Obtacles
 						</description>
@@ -102,7 +102,7 @@
 								Ends after a fix amount of time
 							</description>
 						</feature>
-						<feature abstract="true" mandatory="true" name="ByScore">
+						<feature mandatory="true" name="ByScore">
 							<description>
 								Ends after Reaching a fix score
 							</description>
