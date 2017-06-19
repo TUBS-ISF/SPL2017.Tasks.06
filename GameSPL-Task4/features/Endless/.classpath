@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="/GameSPL-Task4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
