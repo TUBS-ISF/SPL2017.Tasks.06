@@ -1,112 +1,92 @@
-package GameSPL;
-import java.awt.Color; 
-import java.awt.Font; 
-import java.awt.Graphics; import java.awt.Rectangle; 
-import java.awt.event.ActionEvent; 
-import java.awt.event.ActionListener; 
-import java.util.ArrayList; 
-import java.util.Random; 
 
-import javax.swing.JFrame; 
-import javax.swing.Timer; import java.awt.event.KeyEvent;  
-import java.awt.event.KeyListener; 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
 
-public   class  Sidescroller  implements ActionListener, KeyListener {
-	
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
+public class Sidescroller implements ActionListener, KeyListener, MouseListener {
 
 	public static Sidescroller sidescroller;
 
-	
-
 	public final int WIDTH = 800, HEIGHT = 800;
-
-	
 
 	public Renderer renderer;
 
-	
-
-	public int ticks, yMotion, score;
-
-	
+	public int ticks, yMotion, score, counter;
 
 	public boolean gameOver, started;
 
-	
 	public Rectangle player;
 
-	
 	public ArrayList<Rectangle> columns;
 
-	
-
 	public Random rand;
+	
+	public Color bgc = Color.cyan;
 
-	
-	
 	public static void main(String[] args) {
 		sidescroller = new Sidescroller();
 	}
 
-	
-	public Sidescroller  () {
-		
+	public Sidescroller() {
+
 		JFrame jframe = new JFrame();
 		Timer timer = new Timer(20, this);
 
 		renderer = new Renderer();
 		rand = new Random();
 
-		
 		jframe.add(renderer);
 		jframe.setTitle("GameSPL-Task5");
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.setSize(WIDTH, HEIGHT);
+		jframe.addMouseListener(this);
+		jframe.addKeyListener(this);
 		// jframe.setResizable(false);
 		jframe.setVisible(true);
 
 		player = new Rectangle(WIDTH / 2, HEIGHT / 2 - 10, 20, 20);
 		columns = new ArrayList<Rectangle>();
 
-		
 		timer.start();
-	
-
-		addColumn(true);
-		addColumn(true);
-	
-
-		jframe.addKeyListener(this);
 	}
 
-	
-
 	public void addColumn(boolean start) {
-//		int space = 300;
+		// int space = 300;
 		int width = 100;
 		int height = 50 + rand.nextInt(300);
 
 		if (start) {
 			columns.add(new Rectangle(WIDTH + width + columns.size() * 600, HEIGHT - height - 120, width, height));
-//			columns.add(new Rectangle(WIDTH + width + (columns.size() - 1) * 300, 0, width, HEIGHT - height - space));
+			// columns.add(new Rectangle(WIDTH + width + (columns.size() - 1) *
+			// 300, 0, width, HEIGHT - height - space));
 		} else {
 			columns.add(new Rectangle(columns.get(columns.size() - 1).x + 600, HEIGHT - height - 120, width, height));
-//			columns.add(new Rectangle(columns.get(columns.size() - 1).x, 0, width, HEIGHT - height - space));
+			// columns.add(new Rectangle(columns.get(columns.size() - 1).x, 0,
+			// width, HEIGHT - height - space));
 
 		}
 	}
-
-	
 
 	public void paintColumn(Graphics g, Rectangle column) {
 		g.setColor(Color.green.darker());
 		g.fillRect(column.x, column.y, column.width, column.height);
 	}
 
-	
-
-	public void jump(){
-		if(gameOver){
+	public void jump() {
+		if (gameOver) {
 			player = new Rectangle(WIDTH / 2, HEIGHT / 2 - 10, 20, 20);
 			columns.clear();
 			yMotion = 0;
@@ -114,24 +94,21 @@ public   class  Sidescroller  implements ActionListener, KeyListener {
 
 			addColumn(true);
 			addColumn(true);
-			
+
 			gameOver = false;
 		}
-		
-		if(!started){
+
+		if (!started) {
 			started = true;
-		}else if (!gameOver){
-			if (yMotion >0){
+		} else if (!gameOver) {
+			if (yMotion > 0) {
 				yMotion = 0;
 			}
 			yMotion -= 10;
-		}	
-		
-		
+		}
+
 	}
 
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -148,23 +125,30 @@ public   class  Sidescroller  implements ActionListener, KeyListener {
 			if (ticks % 2 == 0 && yMotion < 15) {
 				yMotion += 2;
 			}
-			
+
 			for (int i = 0; i < columns.size(); i++) {
 				Rectangle column = columns.get(i);
 				if (column.x + column.width < 0) {
 					columns.remove(column);
-//					if (column.y == 0 ) {
+					// if (column.y == 0 ) {
 					addColumn(false);
-//					}
+					// }
 				}
 			}
 
-			player.y += yMotion;
-			
-			actionfeature();
-			
+			counter = ticks;
 
-  
+			player.y += yMotion;
+
+			actionfeature();
+
+			for (Rectangle column : columns) {
+				if (/* column.y == 0 && */ player.x + player.width / 2 > column.x + column.width / 2 - 10
+						&& player.x + player.width / 2 < column.x + column.width / 2 + 10) {
+					score++;
+				}
+			}
+
 			if (player.y > HEIGHT - 120 || player.y < 0) {
 				gameOver = true;
 			}
@@ -176,30 +160,14 @@ public   class  Sidescroller  implements ActionListener, KeyListener {
 		renderer.repaint();
 	}
 
-	
-	
-	 private void  actionfeature__wrappee__Base  (){
-		
+	public void actionfeature() {
+
 	}
 
-	
-	public void actionfeature(){
+	public void repaint(Graphics gg) {
+		Graphics g = gg;
 		
-		actionfeature__wrappee__Base();
-		for (Rectangle column : columns) {
-			if (column.intersects(player)) {
-				gameOver = true;
-		
-				player.x = column.x - player.width;
-			}
-		}
-	}
-
-	
-
-	public void repaint(Graphics g) {
-		g.setColor(Color.cyan);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
+		setbg(g);
 
 		g.setColor(Color.orange);
 		g.fillRect(0, HEIGHT - 150, WIDTH, 150);
@@ -213,77 +181,66 @@ public   class  Sidescroller  implements ActionListener, KeyListener {
 		for (Rectangle column : columns) {
 			paintColumn(g, column);
 		}
-		
+
 		textfeatures();
 	}
-
 	
-
-	 private void  textfeatures__wrappee__Base  (){
-		Graphics g = renderer.gr;
-		g.setColor(Color.white);
-		g.setFont(new Font("Arial", 1, 100));
-				
+	public void setbg(Graphics g){
+		g.setColor(bgc);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 	}
 
-	
-	 private void  textfeatures__wrappee__Score  (){
-		
-		textfeatures__wrappee__Base();
+	public void textfeatures() {
 
 		Graphics g = renderer.gr;
-		
-		for (Rectangle column : columns) {
-			if (/*column.y == 0 &&*/ player.x + player.width /2 > column.x + column.width / 2  - 10 && player.x + player.width / 2 < column.x + column.width / 2 + 10){
-				score++;
-			}
-		}
-			
-		if (started){
-			g.drawString(String.valueOf(score), WIDTH / 2 - 25, 100);
-		}
+		// g.setColor(Color.white);
+		// g.setFont(new Font("Arial", 1, 100));
+		//
+		//// if (!started) {
+		//// g.drawString("Click to start", 30, HEIGHT / 2 - 50);
+		//// }
+		////
+		//// if (gameOver) {
+		//// g.drawString("Game Over!", WIDTH/2 - 325 , HEIGHT / 2 - 50);
+		//// }
 	}
 
-	
-	public void textfeatures(){
-		
-		textfeatures__wrappee__Score();
-
-		Graphics g = renderer.gr;
-		g.setColor(Color.white);
-		g.setFont(new Font("Arial", 1, 100));
-		
-		if (!started) {
-			g.drawString("Click to start", 30, HEIGHT / 2 - 50);
-		}
-		
-		if (gameOver) {
-			g.drawString("Game Over!", WIDTH/2 - 325 , HEIGHT / 2 - 50);
-		}
-	}
-
-	
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
 
 	}
 
-	
-
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_SPACE){
-			jump();
-		}
 	}
-
-	
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		
+
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+
+	}
 
 }

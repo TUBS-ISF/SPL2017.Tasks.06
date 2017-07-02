@@ -55,7 +55,7 @@
 						<description>
 							Setting the Background
 						</description>
-						<feature abstract="true" name="Customizable"/>
+						<feature name="Customizable"/>
 					</and>
 					<and mandatory="true" name="Obtacles">
 						<description>
@@ -73,7 +73,7 @@
 							Counts the passed Obtacles
 						</description>
 					</feature>
-					<feature abstract="true" mandatory="true" name="Timer">
+					<feature mandatory="true" name="Timer">
 						<description>
 							Sets a Timer on the Window, which counts
 						</description>

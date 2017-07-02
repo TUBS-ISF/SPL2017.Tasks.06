@@ -1,5 +1,4 @@
-package GameSPL;
-//package GameSPL;
+
 
 import java.awt.Graphics; 
 
