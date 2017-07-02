@@ -6,4 +6,4 @@ Bug: You need to "Die" first by jumping outside the window, to generate the obst
 
 ------------
 Probleme während der Bearbeitung:
-Hat etwas gedauert und erst mir Nachfrage eines  Kommilitonen um herauszufinden, dass man das AspectJ Dev Tool runterladen muss. (Bitte im Aufgabenblatt vermerken)
+Hat etwas gedauert und erst mit Hilfe eines  Kommilitonen um herauszufinden, dass man das AspectJ Dev Tool runterladen muss. (Bitte im Aufgabenblatt vermerken)
